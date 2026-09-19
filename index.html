@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piyush Gaming Store</title>
+    <style>
+        :root {
+            --bg-color: #f7f4ed;
+            --card-bg: #ffffff;
+            --primary-purple: #3d1538;
+            --primary-purple-hover: #521d4b;
+            --text-dark: #2c2c2c;
+            --text-muted: #7a7a7a;
+            --accent-green: #2e7d58;
+            --accent-green-hover: #256647;
+            --telegram-blue: #0088cc;
+            --border-color: #e5e0d3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            padding: 20px 12px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 5px;
+        }
+
+        .store-logo {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #3b2c24;
+            line-height: 1.3;
+        }
+
+        .key-badge {
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .title {
+            color: var(--primary-purple);
+            font-size: 24px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .input-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .select-box, .text-input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            background: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 18px;
+            outline: none;
+        }
+
+        .promo-box {
+            border: 1px solid #f0ecdf;
+            background: #fbf9f4;
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 24px;
+        }
+
+        .promo-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .promo-row input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #e2ded4;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            background: #fff;
+        }
+
+        .btn-apply {
+            background: var(--accent-green);
+            color: #fff;
+            border: none;
+            padding: 0 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .security-badge {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-purple-hover);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 14px;
+        }
+
+        /* Payment View Styles */
+        #payment-view {
+            display: none;
+        }
+
+        .qr-wrapper {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 16px;
+            padding: 16px;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 16px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .qr-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .amount-display {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .amount-display span {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--accent-green);
+            display: block;
+        }
+
+        .amount-display h2 {
+            font-size: 32px;
+            color: var(--primary-purple);
+            font-weight: 800;
+        }
+
+        .instruction-box {
+            background: #faf8f2;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .order-meta-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 6px 0;
+            color: #444;
+        }
+
+        .meta-label {
+            color: var(--text-muted);
+        }
+
+        .status-badge {
+            background: #fff4e5;
+            color: #b76e00;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .timer-box {
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .timer-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-purple);
+        }
+
+        .btn-green {
+            background: var(--accent-green);
+            color: #fff;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .btn-telegram {
+            background: var(--telegram-blue);
+            color: #fff;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-cancel {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="store-logo">
+            Piyush store<br>Hack sell
+        </div>
+        <div class="key-badge">🔑</div>
+    </header>
+
+    <!-- STEP 1: SELECT ACCESS FORM -->
+    <div id="select-view">
+        <div class="card">
+            <h2 class="title">Select Access</h2>
+            <p class="subtitle">Instant Digital Delivery</p>
+
+            <label class="input-label">Product</label>
+            <select id="product-select" class="select-box">
+                <option value="BGMI - SERVER HACK">BGMI - SERVER HACK</option>
+                <option value="BGMI AIMBOT HACK">BGMI AIMBOT HACK</option>
+                <option value="BGMI X-RAY VISION">BGMI X-RAY VISION</option>
+            </select>
+
+            <label class="input-label">Duration / Variant</label>
+            <select id="plan-select" class="select-box">
+                <option value="50.00">12 HOURS - 50.00</option>
+                <option value="99.00">AIMBOT OR X-RAY VISION ₹99.00</option>
+            </select>
+
+            <div class="promo-box">
+                <span style="font-size: 12px; font-weight: 600;">🏷️ Have a Promo Code?</span>
+                <div class="promo-row">
+                    <input type="text" placeholder="ENTER PROMO CODE">
+                    <button type="button" class="btn-apply">Apply</button>
+                </div>
+                <div class="security-badge">
+                    🛡️ Discount is verified securely before payment.
+                </div>
+            </div>
+
+            <button type="button" class="btn-primary" onclick="proceedToPayment()">Purchase Access →</button>
+            <p class="footer-note">🛡️ Safe and secure instant delivery</p>
+        </div>
+    </div>
+
+    <!-- STEP 2: SCAN & PAY VIEW -->
+    <div id="payment-view">
+        <div class="card">
+            <p style="text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 1px; color: var(--accent-green); text-transform: uppercase;">Scan To Pay</p>
+            <h2 class="title" style="margin-bottom: 2px;">Scan & Pay</h2>
+            <p class="subtitle">PhonePe • Google Pay • Paytm • Any UPI app</p>
+
+            <div class="qr-wrapper">
+                <img src="myqr.jpg" alt="UPI QR CODE">
+                
+            </div>
+
+            <div class="amount-display">
+                <span>PAY EXACTLY</span>
+                <h2 id="display-amount">₹99.00</h2>
+            </div>
+
+            <div class="instruction-box">
+                <b>Instructions:</b><br>
+                1. Scan the QR code above<br>
+                2. Pay exactly the shown amount<br>
+                3. Send payment screenshot on Telegram / WhatsApp
+            </div>
+        </div>
+
+        <div class="order-meta-card">
+            <div class="meta-item">
+                <span class="meta-label">Order ID</span>
+                <span style="font-weight: 700;" id="order-id">ORD-85513927</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Product</span>
+                <span style="font-weight: 700; text-align: right; max-width: 60%;" id="order-product">Selected Product</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Status</span>
+                <span class="status-badge">⏳ Pending</span>
+            </div>
+
+            <div class="timer-box">
+                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Complete payment within</p>
+                <div class="timer-number" id="timer">03:00</div>
+            </div>
+
+            <button type="button" class="btn-green" onclick="alert('Payment marked for verification!')">✅ Payment Successful</button>
+            <a href="https://t.me/BGMIHACKSELL07" target="_blank" class="btn-telegram">✈️ Send Payment Proof on Telegram</a>
+            <button type="button" class="btn-cancel" onclick="goBack()">Cancel & Go Back</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let timerInterval;
+
+    function proceedToPayment() {
+        const product = document.getElementById('product-select').value;
+        const amount = document.getElementById('plan-select').value;
+
+        document.getElementById('order-product').innerText = product;
+        document.getElementById('display-amount').innerText = "₹" + amount;
+        document.getElementById('order-id').innerText = "ORD-" + Math.floor(10000000 + Math.random() * 90000000);
+
+        document.getElementById('select-view').style.display = 'none';
+        document.getElementById('payment-view').style.display = 'block';
+
+        startTimer(180);
+    }
+
+    function goBack() {
+        clearInterval(timerInterval);
+        document.getElementById('payment-view').style.display = 'none';
+        document.getElementById('select-view').style.display = 'block';
+    }
+
+    function startTimer(duration) {
+        clearInterval(timerInterval);
+        let timer = duration, minutes, seconds;
+        timerInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById('timer').textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('timer').textContent = "00:00";
+                alert("Order expired! Please try again.");
+                goBack();
+            }
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
